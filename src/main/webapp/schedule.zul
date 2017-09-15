@@ -1,0 +1,18 @@
+<?page title="Schedule" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm') @init('com.dogway.bwscout.viewmodel.ScheduleViewModel')" title="Schedule" border="normal">
+	<vlayout>
+		<label value="Season" />
+<listbox model="@bind(vm.seasons)">
+	<template name="model">
+            <listitem>
+                <listcell label="@bind(each.year)"></listcell>
+                <listcell label="@bind(each.id)"></listcell>
+            </listitem>
+        </template>
+</listbox>
+
+	</vlayout>
+</window>
+</zk>

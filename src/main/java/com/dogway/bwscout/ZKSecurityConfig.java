@@ -62,7 +62,7 @@ public class ZKSecurityConfig extends WebSecurityConfigurerAdapter {
 		//This success handler gives us our default page on successful login.
 		filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
 		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		        this.setDefaultTargetUrl("/schedule.zul");
+		        this.setDefaultTargetUrl("/main.zul");
 		        super.onAuthenticationSuccess(request, response, authentication);
 		    }
 		});
@@ -71,6 +71,9 @@ public class ZKSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//need this here for this 403 error
+		//{"timestamp":1506220813392,"status":403,"error":"Forbidden","message":"Invalid CSRF Token 'null' was found on the request parameter '_csrf' or header 'X-CSRF-TOKEN'.","path":"/zkau"}
+		http.csrf().disable();
 		http.addFilterAfter(new OAuth2ClientContextFilter(), AbstractPreAuthenticatedProcessingFilter.class)
 				.addFilterAfter(openIdConnectFilter(), OAuth2ClientContextFilter.class).httpBasic()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/google-login")).and()

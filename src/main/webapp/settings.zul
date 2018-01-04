@@ -1,0 +1,20 @@
+<?page title="Settings" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" ?>
+<?script src="/bootstrap/js/bootstrap.js" ?>
+<zk>
+	<panel title="Settings">
+		<panelchildren>
+			<div class="input-group">
+				<textbox class="form-control" placeholder="Set The Season Year" />
+			</div>
+			
+			<div class="input-group">
+				<textbox class="form-control" placeholder="Set Your Team" />
+			</div>
+			<div class="btn-group">
+	<button class="btn-primary">Left</button>
+	<button>Middle</button>
+	</div>
+		</panelchildren>
+	</panel>
+</zk>

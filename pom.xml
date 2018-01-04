@@ -76,6 +76,12 @@
 			<artifactId>zhtml</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.zkoss.theme/atlantic -->
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>atlantic</artifactId>
+			<version>1.1.7.FL.20170511</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
@@ -88,6 +94,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 
 		<!-- Client Stubs -->
 		<!-- <dependency> -->

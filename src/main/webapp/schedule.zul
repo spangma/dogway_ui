@@ -1,18 +1,38 @@
 <?page title="Schedule" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window apply="org.zkoss.bind.BindComposer"
-    viewModel="@id('vm') @init('com.dogway.bwscout.viewmodel.ScheduleViewModel')" title="Schedule" border="normal">
-	<vlayout>
-		<label value="Season" />
-<listbox model="@bind(vm.seasons)">
-	<template name="model">
-            <listitem>
-                <listcell label="@bind(each.year)"></listcell>
-                <listcell label="@bind(each.id)"></listcell>
-            </listitem>
-        </template>
-</listbox>
-
-	</vlayout>
-</window>
+	<window apply="org.zkoss.bind.BindComposer" title="Schedule"
+		viewModel="@id('vm') @init('com.dogway.bwscout.viewmodel.ScheduleViewModel')">
+		<vlayout>
+			<panel title="Schedule">
+				<panelchildren>
+					<listbox model="@bind(vm.games)">
+						<template name="model">
+							<listitem>
+								<listcell>
+									<panel title="@bind(each.id)">
+										<panelchildren>
+											<label
+												value="@bind(each.id)" />
+												<label
+												value=" VS " />
+											<label
+												value="@bind(each.id)" />
+											<label
+												value="@bind(each.gameTime)" />
+											</panelchildren>
+									</panel>
+								</listcell>
+							</listitem>
+						</template>
+						
+					</listbox>
+<panel title="Add New">
+									<panelchildren>
+										<label value="hello" />
+									</panelchildren>
+								</panel>
+				</panelchildren>
+			</panel>
+		</vlayout>
+	</window>
 </zk>

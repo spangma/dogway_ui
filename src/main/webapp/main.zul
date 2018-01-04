@@ -1,0 +1,65 @@
+<?page title="Main" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<style>
+	.title{
+	color:white;font-size:40px
+	}
+	.menu-button { 
+		font-size: 12px; 
+		color: white; 
+		text-shadow: 0 -1px	0 rgba(0, 0, 0, .35); 
+		border: 0px black solid; 
+		border-radius: 2px; 
+		padding: 2px;
+		background: transparent;
+		cursor: pointer;
+	}
+	.switch-button { 
+		border: 0px black solid; 
+		border-radius: 2px; 
+		padding: 2px;
+		background: transparent;
+		cursor: pointer;
+	}
+	.switch-button:hover{
+		background-color: #101010;
+	}	
+	.header{
+		background-color:#02B0E5
+	}
+	.z-window-overlapped-shadow{
+		box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+	}
+	</style>
+	<window width="100%" height="100%" 
+	        apply="org.zkoss.bind.BindComposer" 
+	        viewModel="@id('vm') @init('com.dogway.bwscout.viewmodel.MainViewModel')">
+		<borderlayout>
+			<!-- <north height="30px" sclass="header"> -->
+			<north>
+				<hbox width="100%">
+				<!-- <button sclass="menu-button" visible="true" -->
+					<button visible="true"
+						image="images/menu.png"
+						onClick="@command('toggleMenu')" />
+				</hbox>
+			</north>
+			<west width="0px" >
+				<window mode="overlapped" visible="@bind(vm.sideBarMenuVisible)" width="200px" top="35px" left="10px" border="normal">
+					<vbox  width="100%" height="80px" pack="center" align="center">
+					<label style="font-size:20px">Dogway Menu</label>
+					</vbox>
+					<listbox>
+						<listitem label="Schedule" onClick="@command('centerToScheduleZul')" />
+						<listitem label="Start Game" onClick="@command('centerToStartGameZul')" />
+						<listitem label="Settings" onClick="@command('centerToSettingsZul')" />
+					</listbox>
+				</window>
+			</west><center>
+			<include id="selectedZul" src="@bind(vm.currentIncludeZul)"/>
+			</center>
+			<south></south>
+			
+		</borderlayout>
+	</window>
+</zk>

@@ -1,7 +1,9 @@
 package com.dogway.bwscout;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,39 +30,64 @@ public class Application {
 	/*
 	 * plain URL...
 	 */
-	@RequestMapping("/")
-	@ResponseBody
-	String home() {
-		return "hi!";
-	}
+//	@RequestMapping("/")
+//	@ResponseBody
+//	String home() {
+//		return "hi!";
+//	}
 
 	/*
 	 * ZK servlets
 	 */
 	@Bean
 	public ServletRegistrationBean dHtmlLayoutServlet() {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("update-uri", "/zkau");
-		DHtmlLayoutServlet dHtmlLayoutServlet = new DHtmlLayoutServlet();
-		ServletRegistrationBean reg = new ServletRegistrationBean(dHtmlLayoutServlet, "*.zul");
-		reg.setLoadOnStartup(1);
-		reg.setInitParameters(params);
-		return reg;
+	    Map<String, String> params = new HashMap<>();
+	    params.put("update-uri", "/zkau");
+	    Set<String> mappings = new HashSet<>();
+	    mappings.add("*.zul");
+	    mappings.add("*.zhtml");
+	    ServletRegistrationBean bean = new ServletRegistrationBean(new DHtmlLayoutServlet());
+	    bean.setLoadOnStartup(1);
+	    bean.setInitParameters(params);
+	    bean.setUrlMappings(mappings);
+	    return bean;
 	}
 
 	@Bean
 	public ServletRegistrationBean dHtmlUpdateServlet() {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("update-uri", "/zkau/*");
-		ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlUpdateServlet(), "/zkau/*");
-		reg.setLoadOnStartup(2);
-		reg.setInitParameters(params);
-		return reg;
+	    ServletRegistrationBean bean = new ServletRegistrationBean(new DHtmlUpdateServlet(), "/zkau/*");
+	    bean.setLoadOnStartup(2);
+	    return bean;
 	}
-	
+
 	@Bean
 	public HttpSessionListener httpSessionListener() {
-		return new HttpSessionListener();
+	    return new HttpSessionListener();
 	}
+//	@Bean
+//	public ServletRegistrationBean dHtmlLayoutServlet() {
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("update-uri", "/zkau");
+//		DHtmlLayoutServlet dHtmlLayoutServlet = new DHtmlLayoutServlet();
+//		ServletRegistrationBean reg = new ServletRegistrationBean(dHtmlLayoutServlet, "*.zul");
+//		reg.setLoadOnStartup(1);
+//		reg.setInitParameters(params);
+//		return reg;
+//	}
+//
+//	@Bean
+//	public ServletRegistrationBean dHtmlUpdateServlet() {
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("update-uri", "/zkau/*");
+//		ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlUpdateServlet(), "/zkau/*");
+//		reg.setLoadOnStartup(2);
+//		reg.setInitParameters(params);
+//		return reg;
+//	}
+//	
+//	@Bean
+//	public HttpSessionListener httpSessionListener() {
+//		return new HttpSessionListener();
+//	}
 
 }
